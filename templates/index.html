@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Predição de Ocupação</title>
+    <link rel="icon" type="image/png" href="/static/img/icone.png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Detecção de Ocupação de Ambientes</h1>
+        <form method="POST">
+            <label for="temperature">Temperatura (°C):</label>
+            <input type="number" step="0.001" name="temperature" id="temperature" required>
+
+            <label for="humidity">Umidade (%):</label>
+            <input type="number" step="0.001" name="humidity" id="humidity" required>
+
+            <label for="light">Luz (lux):</label>
+            <input type="number" step="0.001" name="light" id="light" required>
+
+            <label for="co2">CO₂ (ppm):</label>
+            <input type="number" step="0.001" name="co2" id="co2" required>
+
+            <label for="humidity_ratio">Razão de Umidade:</label>
+            <input type="number" step="0.000001" name="humidity_ratio" id="humidity_ratio" required>
+
+            <button type="submit">Realizar Predição</button>
+        </form>
+
+        {% if Occupancy is defined %}
+            <div class="resultado">
+                <h2>Resultado da Predição:</h2>
+                <p><strong>Data/Hora:</strong> {{ data }}</p>
+                <p><strong>Ambiente Ocupado?</strong> {{ 'Sim' if Occupancy == 1 else 'Não' }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
